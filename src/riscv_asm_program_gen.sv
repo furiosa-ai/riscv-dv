@@ -424,6 +424,11 @@ class riscv_asm_program_gen extends uvm_object;
       init_floating_point_gpr();
     end
     init_gpr();
+    
+    // Initialize MSCRATCH to 0
+    str = {indent, $sformatf("csrw 0x%0x, x%0d", MSCRATCH, 0)};
+    instr_stream.push_back(str);
+
     // Init stack pointer to point to the end of the user stack
     str = {indent, $sformatf("la x%0d, %0suser_stack_end", cfg.sp, hart_prefix(hart))};
     instr_stream.push_back(str);

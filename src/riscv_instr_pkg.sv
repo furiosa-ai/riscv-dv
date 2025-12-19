@@ -1380,7 +1380,9 @@ package riscv_instr_pkg;
     string store_instr = (XLEN == 32) ? "sw" : "sd";
     if (scratch inside {implemented_csr}) begin
       // Push USP from gpr.SP onto the kernel stack
-      instr.push_back($sformatf("addi x%0d, x%0d, -4", tp, tp));
+      // Change addi instruction to adjust for XLEN (4 bytes for RV32, 8 bytes for RV64)
+      instr.push_back($sformatf("addi x%0d, x%0d, %0d", tp, tp, -(XLEN/8)));
+      
       instr.push_back($sformatf("%0s  x%0d, (x%0d)", store_instr, sp, tp));
       // Move KSP to gpr.SP
       instr.push_back($sformatf("add x%0d, x%0d, zero", sp, tp));

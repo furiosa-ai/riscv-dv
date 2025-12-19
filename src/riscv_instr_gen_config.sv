@@ -346,7 +346,8 @@ class riscv_instr_gen_config extends uvm_object;
     } else {
      // Setting MODE = Vectored may impose an additional alignmentconstraint on BASE,
      // requiring up to 4×XLEN-byte alignment
-     soft tvec_alignment == $clog2((XLEN * 4) / 8);
+     // Change to 7 (128bytes) to support both 32-bit and 64-bit
+     soft tvec_alignment == 7;
     }
   }
 
