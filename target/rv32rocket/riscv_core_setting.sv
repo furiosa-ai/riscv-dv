@@ -42,6 +42,9 @@ int max_interrupt_vector_num = 16;
 // Physical memory protection support
 bit support_pmp = 1;
 
+// Enhanced physical memory protection support
+bit support_epmp = 1;
+
 // Debug mode support
 bit support_debug_mode = 0;
 
